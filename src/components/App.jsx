@@ -18,11 +18,7 @@ class App extends Component {
       kick: new Audio(kick),
       snare: new Audio(snare),
       hiHat: new Audio(hiHat),
-      rest: new Audio(rest),
-      beats: 16,
-      curBeat: 0,
-      tempo: 1,
-      staff: []
+      rest: new Audio(rest)
     };
   }
 
@@ -37,19 +33,12 @@ class App extends Component {
   };
 
   async playKick() {
-    // for (var i = 0; i < this.state.kickPattern; i++) {
-    //   console.log(i);
-    //   if (this.kickPattern[i]) {
-    //     console.log('hello');
-    //     this.state.kick.play();
-    //   } else {
-    //     setTimeout(500);
-    //   }
-    // }
     for (var i = 0; i < this.state.kickPattern.length; i++) {
       if (!this.state.kickPattern[i]) {
+        console.log('**');
         await this.sleep(100);
       } else {
+        console.log('boom');
         this.state.kick.play();
       }
     }
@@ -69,10 +58,10 @@ class App extends Component {
   async playHiHat() {
     for (var i = 0; i < this.state.hiHatPattern.length; i++) {
       if (!this.state.hiHatPattern[i]) {
-        console.log('**');
+        // console.log('**');
         await this.sleep(100);
       } else {
-        console.log('pah');
+        // console.log('pah');
         this.state.hiHat.play();
       }
     }
@@ -95,12 +84,98 @@ class App extends Component {
     })
       .done((data) => {
         this.setState({
-          kickPattern: data[0].instrument1.split(''),
-          snarePattern: data[0].instrument2.split(''),
-          hiHatPattern: data[0].instrument3.split('')
+          kickPattern: data[0].instrument1.split('').map(Number),
+          snarePattern: data[0].instrument2.split('').map(Number),
+          hiHatPattern: data[0].instrument3.split('').map(Number)
         });
       });
   };
+
+  // setTempo() {
+  //   this.state.kick.playbackRate = this.state.tempo;
+  //   this.state.snare.playbackRate = this.state.tempo;
+  //   this.state.hiHat.playbackRate = this.state.tempo;
+  //   this.state.rest.playbackRate = this.state.tempo;
+  // }
+
+  // add = () => {
+  //   this.setTempo();
+  //   for (var i = 0; i < this.state.beats; i++) {
+  //     this.state.staff.push([]);
+  //     if (!this.state.kickPattern[i] && !this.state.snarePattern[i] && !this.state.hiHatPattern[i]) {
+  //       this.state.staff[i].push(this.state.rest);
+  //       this.state.staff[i][0].playbackRate = 2;
+  //     }
+  //     if (this.state.kickPattern[i]) {
+  //       this.state.staff[i].push(this.state.kick);
+  //     }
+  //     if (this.state.snarePattern[i]) {
+  //       this.state.staff[i].push(this.state.snare);
+  //     }
+  //     if (this.state.hiHatPattern[i]) {
+  //       this.state.staff[i].push(this.state.hiHat);
+  //     }
+  //     this.addOnEnd(i);
+  //   }
+  //   console.log(this.state.staff);
+  // }
+
+  // addOnEnd(index) {
+  //   this.state.staff[index][this.state.staff[index].length - 1].addEventListener('ended', this.playNext);
+  // }
+
+  // playNext = () => {
+  //   if (this.state.curBeat < this.state.beats) {
+  //     for (var i = 0; i < this.state.staff[this.state.curBeat].length; i++) {
+  //       this.state.staff[this.state.curBeat][i].play();
+  //     }
+  //     this.state.curBeat++;
+  //   }
+  // }
+
+  // playNext = () => {
+  //   if (this.state.curBeat < this.state.beats) {
+  //     if (!this.state.kickPattern[this.state.curBeat] && !this.state.snarePattern[this.state.curBeat] && !this.state.hiHatPattern[this.state.curBeat]) {
+  //       this.sleep(100);
+  //     }
+  //     if (this.state.kickPattern[this.state.curBeat]) {
+  //       this.state.kick.addEventListener('ended', this.playNext)
+  //       this.state.kick.play();
+  //     }
+  //     if (this.state.snarePattern[this.state.curBeat]) {
+  //       this.state.snare.addEventListener('ended', this.playNext)
+  //       this.state.snare.play();
+  //     }
+  //     if (this.state.hiHatPattern[this.state.curBeat]) {
+  //       this.state.hiHat.addEventListener('ended', this.playNext)
+  //       this.state.hiHat.play();
+  //     }
+  //     this.state.curBeat++;
+  //     console.log(this.state.curBeat);
+  //   }
+  // }
+
+  // playNext = () => {
+  //   if (this.state.curBeat < this.state.beats) {
+  //     if (!this.state.kickPattern[this.state.curBeat] && !this.state.snarePattern[this.state.curBeat] && !this.state.hiHatPattern[this.state.curBeat]) {
+  //       this.sleep(100);
+  //     }
+  //     if (this.state.kickPattern[this.state.curBeat]) {
+  //       this.state.kick.addEventListener('ended', this.playNext)
+  //       this.state.kick.play();
+  //     }
+  //     if (this.state.snarePattern[this.state.curBeat]) {
+  //       this.state.snare.addEventListener('ended', this.playNext)
+  //       this.state.snare.play();
+  //     }
+  //     if (this.state.hiHatPattern[this.state.curBeat]) {
+  //       this.state.hiHat.addEventListener('ended', this.playNext)
+  //       this.state.hiHat.play();
+  //     }
+  //     this.state.curBeat++;
+  //     console.log(this.state.curBeat);
+  //   }
+  // }
 
   render() {
     return (
