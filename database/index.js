@@ -9,7 +9,10 @@ let patternSchema = mongoose.Schema({
   user_id: Number,
   instruments: [
     {type: mongoose.Schema.Types.ObjectId, ref: 'instrument'}
-  ]
+  ],
+  instrument1: String,
+  instrument2: String,
+  instrument3: String
 });
 
 let userSchema = mongoose.Schema({
@@ -34,7 +37,9 @@ let instrument = mongoose.model('instrument', instrumentSchema);
 
 // TODO: add functionality
 // let save = () => {};
-// let get = () => {};
+let get = (id) => {
+  return pattern.find({id: Number(id)});
+};
 
 // module.exports.save = save;
-// module.exports.get = get;
+module.exports.get = get;
