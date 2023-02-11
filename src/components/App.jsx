@@ -180,10 +180,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/* <Staff /> */}
-        <button onClick={this.add}>
-          Add
-        </button>
+        <Staff state={this.state}/>
         <button onClick={() => {this.playAll()}}>
           Play
         </button>

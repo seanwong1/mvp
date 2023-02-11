@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import Beat from './Beat.jsx';
 
 class Instrument extends Component {
+  constructor(props) {
+    super(props);
+  };
+
   render() {
-    // var beats = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map(() => {
-    //   <Beat />
-    // });
+    var beats = this.props.pattern.join('');
 
     return (
       <div>
-        <Beat />
-        <Beat />
-        <Beat />
-        <Beat />
+        {beats}
       </div>
     );
   }
