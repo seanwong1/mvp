@@ -38,7 +38,7 @@ class App extends Component {
         console.log('**');
         await this.sleep(100);
       } else {
-        console.log('boom');
+        console.log('kick');
         this.state.kick.play();
       }
     }
@@ -48,8 +48,10 @@ class App extends Component {
   async playSnare() {
     for (var i = 0; i < this.state.snarePattern.length; i++) {
       if (!this.state.snarePattern[i]) {
+        console.log('**');
         await this.sleep(100);
       } else {
+        console.log('snare');
         this.state.snare.play();
       }
     }
@@ -58,10 +60,10 @@ class App extends Component {
   async playHiHat() {
     for (var i = 0; i < this.state.hiHatPattern.length; i++) {
       if (!this.state.hiHatPattern[i]) {
-        // console.log('**');
+        console.log('**');
         await this.sleep(100);
       } else {
-        // console.log('pah');
+        console.log('hi hat');
         this.state.hiHat.play();
       }
     }
@@ -180,6 +182,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <h1>Super Looper</h1>
         <Staff state={this.state}/>
         <button onClick={() => {this.playAll()}}>
           Play

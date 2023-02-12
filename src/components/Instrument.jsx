@@ -7,7 +7,7 @@ class Instrument extends Component {
   };
 
   render() {
-    var beats = this.props.pattern.join('');
+    var beats = this.props.pattern.join(' ');
 
     return (
       <div>
